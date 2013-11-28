@@ -1,6 +1,32 @@
 powerline
 =========
 
+This version is forked from [milkypostman's one](https://github.com/milkypostman/powerline), with better support for Evil.
+
+
+## Feature
+
+- Two themes designed to be used with Evil, the state tag's color will change according to current state. (some code is stolen from [this repo](https://github.com/laynor/emacs-conf/blob/master/packages/sm-package-powerline.el))
+
+- Correctly handle column-number-mode, size-indication-mode etc. Local maps in mode line are properly set too.
+
+- Retain as much as possible information of original mode line but still keep clean and simple.
+
+- Support which-function-mode, wc-mode and mode-line-debug-mode.
+
+## Installation
+
+    (require 'powerline)
+    (powerline-center-evil-theme)
+    
+The second line customizes `mode-line-format` according to the default theme.
+
+There are two builtin themes integrated with Evil: `powerline-evil-theme` and `powerline-center-evil-theme`.
+
+
+Original Doc
+============
+
 Emacs version of the Vim powerline.
 
 This is a proposed version 2.0 of the original [Emacs Powerline](http://www.emacswiki.org/emacs/PowerLine) which is a fork of [vim-powerline](https://github.com/Lokaltog/vim-powerline).  
