@@ -25,9 +25,9 @@ There are two builtin themes integrated with Evil: `powerline-evil-theme` and `p
 
 ## Screencast
 
-![image](https://github.com/Dewdrops/powerline/raw/master/evil-center.jpg) 
+![image](https://github.com/Dewdrops/powerline/blob/master/evil-center.png?raw=true) 
 
-![image](https://github.com/Dewdrops/powerline/raw/master/evil.jpg) 
+![image](https://github.com/Dewdrops/powerline/blob/master/evil.png?raw=true) 
 
 
 
