@@ -23,6 +23,13 @@ The second line customizes `mode-line-format` according to the default theme.
 
 There are two builtin themes integrated with Evil: `powerline-evil-theme` and `powerline-center-evil-theme`.
 
+## Screencast
+
+![image](https://github.com/Dewdrops/powerline/raw/master/evil-center.jpg) 
+
+![image](https://github.com/Dewdrops/powerline/raw/master/evil.jpg) 
+
+
 
 Original Doc
 ============
