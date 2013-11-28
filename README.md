@@ -1,12 +1,12 @@
 powerline
 =========
 
-This version is forked from [milkypostman's one](https://github.com/milkypostman/powerline), with better support for Evil.
+This version is forked from [milkypostman's one](https://github.com/milkypostman/powerline), and provide better support for Evil.
 
 
 ## Feature
 
-- Two themes designed to be used with Evil, the state tag's color will change according to current state. (some code is stolen from [this repo](https://github.com/laynor/emacs-conf/blob/master/packages/sm-package-powerline.el))
+- Two themes designed to be used with Evil, which will change state tag's color according to current state. (some code is stolen from [this repo](https://github.com/laynor/emacs-conf/blob/master/packages/sm-package-powerline.el))
 
 - Correctly handle column-number-mode, size-indication-mode etc. Local maps in mode line are properly set too.
 
