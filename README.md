@@ -3,8 +3,10 @@ powerline
 
 This version is forked from [milkypostman's one](https://github.com/milkypostman/powerline), and provide better support for Evil.
 
+English is not my first language, so feel free to correct me of any mistake.
 
-## Feature
+
+## Features
 
 - Two themes designed to be used with Evil, which will change state tag's color according to current state. (some code is stolen from [this repo](https://github.com/laynor/emacs-conf/blob/master/packages/sm-package-powerline.el))
 
@@ -19,7 +21,7 @@ This version is forked from [milkypostman's one](https://github.com/milkypostman
     (require 'powerline)
     (powerline-center-evil-theme)
     
-The second line customizes `mode-line-format` according to the default theme.
+The second line customizes `mode-line-format` according to the centered evil theme.
 
 There are two builtin themes integrated with Evil: `powerline-evil-theme` and `powerline-center-evil-theme`.
 
