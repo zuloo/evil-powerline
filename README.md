@@ -103,3 +103,7 @@ Each divider should have the signature: `(face1 face2 &optional height)`
 
 Separators should consider the `height` when they are created so that the mode-line can change sizes based on the font height.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Dewdrops/powerline/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
