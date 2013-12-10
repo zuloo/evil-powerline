@@ -323,12 +323,12 @@
               (append
                (when (and (boundp 'which-function-mode) which-function-mode)
                  (list
-                  (powerline-raw "[" face1)
+                  (powerline-raw "[" face2)
                   (powerline-which-func)
-                  (powerline-raw "]" face1)))
+                  (powerline-raw "]" face2)))
                (list
                 (when (and (boundp 'wc-mode) wc-mode)
-                  (powerline-wc-mode face1 'r))
+                  (powerline-wc-mode face2 'r))
                 (funcall separator-right face2 face1)
                 (powerline-raw "  " face1)
                 (powerline-raw global-mode-string face1 'r)
