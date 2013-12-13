@@ -601,6 +601,15 @@ mouse-1: Display Line and Column Mode Menu")
                 face)
                (active 'powerline-active2)
                (t 'powerline-inactive2))))
+
+     (defun powerline-evil-tag ()
+       (cond
+        ((and (evil-visual-state-p) (eq evil-visual-selection 'block))
+         " +V+ ")
+        ((and (evil-visual-state-p) (eq evil-visual-selection 'line))
+         " -V- ")
+        (t
+         evil-mode-line-tag)))
      ))
 
 (defvar pl/default-mode-line mode-line-format)

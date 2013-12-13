@@ -250,7 +250,7 @@
                (let ((evil-face (powerline-evil-face active)))
                  (if (split-string (format-mode-line minor-mode-alist))
                      (list (funcall separator-right face2 evil-face)
-                           (powerline-raw evil-mode-line-tag evil-face 'l)
+                           (powerline-raw (powerline-evil-tag) evil-face 'l)
                            (powerline-raw " " evil-face)
                            (funcall separator-left evil-face face2)
                            (powerline-minor-modes face2 'l)
@@ -289,7 +289,7 @@
               (append
                (let ((evil-face (powerline-evil-face active)))
                  (list 
-                  (powerline-raw evil-mode-line-tag evil-face)
+                  (powerline-raw (powerline-evil-tag) evil-face)
                   (funcall separator-left evil-face face3)))
                (list (powerline-raw " " face3)
                      (powerline-raw mode-line-mule-info face3 'l)
