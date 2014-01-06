@@ -1,9 +1,9 @@
+English is not my first language, so feel free to correct me of any mistake.
+
 powerline
 =========
 
 This version is forked from [milkypostman's one](https://github.com/milkypostman/powerline), and provide better support for Evil.
-
-English is not my first language, so feel free to correct me of any mistake.
 
 
 ## Features
