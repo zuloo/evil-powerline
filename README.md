@@ -10,11 +10,11 @@ This version is forked from [milkypostman's one](https://github.com/milkypostman
 
 - Two themes designed to be used with Evil, which will change state tag's color according to current state. (some code is stolen from [this repo](https://github.com/laynor/emacs-conf/blob/master/packages/sm-package-powerline.el))
 
-- Correctly handle column-number-mode, size-indication-mode etc. Local maps in mode line are properly set too.
+- Correctly handle `column-number-mode`, `size-indication-mode` etc. Local maps in mode line are properly set too.
 
 - Retain as much as possible information of original mode line but still keep clean and simple.
 
-- Support which-function-mode, wc-mode and mode-line-debug-mode.
+- Support `which-function-mode`, `wc-mode` and `mode-line-debug-mode`.
 
 ## Installation
 
