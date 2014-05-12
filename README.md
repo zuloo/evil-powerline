@@ -14,7 +14,7 @@ This version is forked from [milkypostman's one](https://github.com/milkypostman
 
 - Retain as much as possible information of original mode line but still keep clean and simple.
 
-- Support `which-function-mode`, `wc-mode` and `mode-line-debug-mode`.
+- Support `which-function-mode`, `wc-mode`, `paradox` and `mode-line-debug-mode`.
 
 ## Installation
 
