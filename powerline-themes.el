@@ -232,7 +232,7 @@
                 (powerline-raw " " face1)
                 (funcall separator-right face1 face2)
                 (powerline-position face2 'r)
-                (powerline-hud face2 face1)
+                (when powerline-use-hud (powerline-hud face2 face1))
                 )))
              (center
               (append
@@ -339,7 +339,7 @@
                 (powerline-raw " " face1)
                 (funcall separator-right face1 face2)
                 (powerline-position face2 'r)
-                (powerline-hud face2 face1)))))
+                (when powerline-use-hud (powerline-hud face2 face1))))))
         (concat (powerline-render lhs)
                 (powerline-fill face2 (powerline-width rhs))
                 (powerline-render rhs)))))))
