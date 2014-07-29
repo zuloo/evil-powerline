@@ -24,30 +24,32 @@
 
 (require 'cl-lib)
 
-(defface powerline-active1 '((t (:foreground "white" :background "grey22" :inherit mode-line)))
+(defface powerline-active1 '((t (:foreground "white" :background "black" :inherit mode-line)))
   "Powerline face 1."
   :group 'powerline)
 
-(defface powerline-active2 '((t (:foreground "white" :background "grey40" :inherit mode-line)))
+(defface powerline-active2 '((t (:foreground "white" :background "brightblue" :inherit mode-line)))
   "Powerline face 2."
   :group 'powerline)
 
-(defface powerline-active3 '((t (:foreground "white" :background "grey60" :inherit mode-line)))
+(defface powerline-active3 '((t (:foreground "white" :background "brightgreen" :inherit mode-line)))
   "Powerline face 3."
   :group 'powerline)
 
 (defface powerline-inactive1
-  '((t (:foreground "white" :background "grey11" :inherit mode-line-inactive)))
+  '((t (:foreground "white" :background "black" :inherit mode-line-inactive)))
   "Powerline face 1."
   :group 'powerline)
 
 (defface powerline-inactive2
-  '((t (:foreground "white" :background "grey20" :inherit mode-line-inactive)))
+  '((t (:foreground "white" :background "brightgreen" :inherit mode-line-inactive)))
   "Powerline face 2."
   :group 'powerline)
 
-(defcustom powerline-default-separator 'arrow
-  "The separator to use for the default theme.
+(defcustom powerline-default-separator (if (window-system)
+                                           'arrow
+                                         'utf-8)
+    "The separator to use for the default theme.
 
 Valid Values: arrow, slant, chamfer, wave, brace, roundstub,
 zigzag, butt, rounded, contour, curve"
@@ -67,7 +69,8 @@ zigzag, butt, rounded, contour, curve"
                  (const slant)
                  (const wave)
                  (const zigzag)
-                 (const nil)))
+                 (const nil)
+                 (const utf-8)))
 
 (defcustom powerline-default-separator-dir '(left . right)
   "The separator direction to use for the default theme.
@@ -79,6 +82,16 @@ DIR must be one of: left, right"
   :group 'powerline
   :type '(cons (choice :tag "Left Hand Side" (const left) (const right))
                (choice :tag "Right Hand Side" (const left) (const right))))
+
+(defcustom powerline-utf-8-separator-left #xe0b0
+    "The unicode character number for the left facing separator"
+    :group 'powerline
+    :type  '(choice integer (const nil)))
+
+(defcustom powerline-utf-8-separator-right #xe0b2
+    "The unicode character number for the right facing separator"
+    :group 'powerline
+    :type  '(choice integer (const nil)))
 
 (defcustom powerline-height nil
   "Override the mode-line height."
@@ -405,9 +418,12 @@ static char * %s[] = {
 
 ;;;###autoload
 (defpowerline powerline-vc
-  (when (and (buffer-file-name (current-buffer))
-             vc-mode)
-    (format-mode-line '(vc-mode vc-mode))))
+    (when (and (buffer-file-name (current-buffer)) vc-mode)
+        (if (null window-system)
+                (let ((backend (vc-backend (buffer-file-name (current-buffer)))))
+                    (when backend
+                        (concat " " (char-to-string #xe0a0) " " (vc-working-revision (buffer-file-name (current-buffer)) backend))))
+            (format-mode-line '(vc-mode vc-mode)))))
 
 ;;;###autoload
 (defpowerline powerline-buffer-size
@@ -569,35 +585,35 @@ mouse-1: Display Line and Column Mode Menu")
   '(progn
      (defface powerline-evil-insert-face
        '((((class color))
-          :foreground "white" :background "green" :weight bold :inherit mode-line)
+          :foreground "white" :background "blue" :weight bold :inherit mode-line)
          (t (:weight bold)))
        "face to fontify evil insert state"
        :group 'powerline)
 
      (defface powerline-evil-normal-face
        '((((class color))
-          :foreground "white" :background "red" :weight bold :inherit mode-line)
+          :foreground "white" :background "green" :weight bold :inherit mode-line)
          (t (:weight bold)))
        "face to fontify evil normal state"
        :group 'powerline)
 
      (defface powerline-evil-visual-face
        '((((class color))
-          :foreground "white" :background "orange" :weight bold :inherit mode-line)
+          :foreground "white" :background "brightred" :weight bold :inherit mode-line)
          (t (:weight bold)))
        "face to fontify evil visual state"
        :group 'powerline)
 
      (defface powerline-evil-motion-face
        '((((class color))
-          :foreground "white" :background "blue" :weight bold :inherit mode-line)
+          :foreground "white" :background "brightmagenta" :weight bold :inherit mode-line)
          (t (:weight bold)))
        "face to fontify evil motion state"
        :group 'powerline)
 
      (defface powerline-evil-emacs-face
        '((((class color))
-          :foreground "white" :background "blue violet" :weight bold :inherit mode-line)
+          :foreground "white" :background "magenta" :weight bold :inherit mode-line)
          (t (:weight bold)))
        "face to fontify evil emacs state"
        :group 'powerline)
@@ -626,11 +642,19 @@ mouse-1: Display Line and Column Mode Menu")
      (defun powerline-evil-tag ()
        (cond
         ((and (evil-visual-state-p) (eq evil-visual-selection 'block))
-         " +V+ ")
+         " V-BLOCK ")
         ((and (evil-visual-state-p) (eq evil-visual-selection 'line))
-         " -V- ")
+         " V-LINE ")
+        ( (evil-visual-state-p)
+         " VISUAL ")
+        ( (evil-insert-state-p)
+         " INSERT ")
+        ( (evil-emacs-state-p)
+         " EMACS ")
+        ( (evil-motion-state-p)
+         " MOTION ")
         (t
-         evil-mode-line-tag)))
+         " NORMAL ")))
      ))
 
 (defvar pl/default-mode-line mode-line-format)
@@ -653,6 +677,19 @@ mouse-1: Display Line and Column Mode Menu")
   (pop pl/minibuffer-selected-window-list))
 
 (add-hook 'minibuffer-exit-hook 'pl/minibuffer-exit)
+
+(defun powerline-set-selected-window ()
+  "sets the variable `powerline-selected-window` appropriately"
+  (when (not (minibuffer-window-active-p (frame-selected-window)))
+    (setq powerline-selected-window (frame-selected-window))))
+
+(add-hook 'window-configuration-change-hook 'powerline-set-selected-window)
+(add-hook 'focus-in-hook 'powerline-set-selected-window)
+(add-hook 'focus-out-hook 'powerline-set-selected-window)
+
+(defadvice select-window (after powerline-select-window activate)
+  "makes powerline aware of window changes"
+  (powerline-set-selected-window))
 
 (defun powerline-selected-window-active ()
   "Return whether the current window is active."
